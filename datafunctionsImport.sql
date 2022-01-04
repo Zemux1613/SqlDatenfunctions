@@ -2,15 +2,15 @@
 
 DELIMITER $$
 CREATE OR REPLACE FUNCTION isLeapYear(targetYear DATE)
-returns INT
+returns BOOLEAN
 BEGIN
 	DECLARE yearNumber INT;
 	SET yearNumber = YEAR(targetYear);
 	IF (MOD(yearNumber,4) = 0 AND 
         (MOD(yearNumber, 100) = 0 AND 
         MOD(yearNumber, 400) = 0))
-		THEN return 1;
-		ELSE return 0;
+		THEN return TRUE;
+		ELSE return FALSE;
     END IF;
 END$$
 DELIMITER ;
@@ -19,13 +19,13 @@ DELIMITER ;
 
 DELIMITER $$
 CREATE OR REPLACE FUNCTION isValidDate(vDate DATE)
-returns INT
+returns BOOLEAN
 BEGIN
 	DECLARE vMonth, vDay INT; 
     SELECT MONTH(vDate),DAY(vDate) INTO vMonth,vDay;
     IF (vMonth < 13 AND vMonth > 0) AND (vDay > 0 AND vDay < 32)
-    THEN return 1;
-    ELSE return 0;
+    THEN return TRUE;
+    ELSE return FALSE;
     END IF;
 END$$
 DELIMITER ;
