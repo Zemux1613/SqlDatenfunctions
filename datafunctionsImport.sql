@@ -29,3 +29,31 @@ BEGIN
     END IF;
 END$$
 DELIMITER ;
+
+-- This function will return the number of days to a target month 
+
+DELIMITER $$
+CREATE OR REPLACE FUNCTION monthLength(vDate DATE)
+returns INT
+BEGIN
+	DECLARE vMonth, vDays INT; 
+    SET vMonth = MONTH(vDate);
+    
+    IF ((vMonth = 1) OR (vMonth = 3) OR (vMonth = 5) OR (vMonth = 7) OR (vMonth = 8) OR (vMonth = 10) OR (vMonth = 12))
+    
+    	THEN SET vDays = 31;
+    
+    ELSEIF vMonth = 2 AND isLeapYear(vDate) = 1
+    	
+        THEN SET vDays = 29;
+        
+    ELSEIF vMonth = 2 AND isLeapYear(vDate) = 0
+    	
+        THEN SET vDays = 28;
+        
+    ELSE SET vDays = 30;
+
+	END IF;
+    return vDays;
+END$$
+DELIMITER ;
