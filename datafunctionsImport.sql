@@ -1,3 +1,5 @@
+-- This function will return 1 in case that the target year is a leap year. In case that the condotion is wron the function will return 0.
+
 DELIMITER $$
 CREATE OR REPLACE FUNCTION isLeapYear(targetYear DATE)
 returns INT
